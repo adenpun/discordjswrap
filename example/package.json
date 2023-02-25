@@ -1,16 +1,17 @@
 {
-  "name": "example",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^14.7.1",
-    "discordjswrap": "link:.."
-  }
+    "name": "example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.cjs",
+    "scripts": {
+        "start": "node ./index.cjs"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^14.7.1",
+        "discordjswrap": "link:..",
+        "dotenv": "^16.0.3"
+    }
 }

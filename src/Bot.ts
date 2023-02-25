@@ -1,37 +1,42 @@
-import { Client, ClientOptions, IntentsBitField } from "discord.js";
 import merge from "deepmerge";
-import type { IBotOptions, Intents, TIntent } from "./types";
-import allIntents from "./intents";
+import type { ClientOptions } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
+import { CommandCollection } from "./Commands";
+import type { IBotOptions } from "./types";
 
 const DEFAULT_CLIENT_OPTIONS: ClientOptions = {
-    intents: ["Guilds"],
+    intents: [GatewayIntentBits.Guilds],
 };
 
 export default class Bot {
+    public botOptions: IBotOptions;
+    public commands: CommandCollection;
     public client: Client;
+    public clientOptions: ClientOptions;
 
-    public constructor(options?: IBotOptions, clientOptions?: ClientOptions) {
-        if (typeof options === "undefined") options = {};
-        if (typeof clientOptions === "undefined") clientOptions = DEFAULT_CLIENT_OPTIONS;
+    public constructor(botOptions: IBotOptions, clientOptions?: ClientOptions) {
+        this.botOptions = botOptions;
+        this.clientOptions = clientOptions ?? DEFAULT_CLIENT_OPTIONS;
 
-        const processedOptions = Bot.ProcessOptions(options);
+        const processedOptions = Bot.ProcessOptions(this.botOptions);
 
         this.client = new Client(
-            merge.all<ClientOptions>([DEFAULT_CLIENT_OPTIONS, processedOptions, clientOptions])
+            merge.all<ClientOptions>([DEFAULT_CLIENT_OPTIONS, processedOptions, this.clientOptions])
         );
+
+        this.commands = new CommandCollection(this);
+
+        return this;
+    }
+
+    public start(): void {
+        this.client.login(this.botOptions.token);
     }
 
     public static ProcessOptions(options: IBotOptions): ClientOptions {
-        const output: ClientOptions = {} as any;
+        const output: ClientOptions = {} as ClientOptions;
 
-        const intentMap = new Map<TIntent, Intents | Intents[]>([["Moderator", allIntents]]);
-
-        const intents = new IntentsBitField();
-
-        options.intents?.forEach((intent) => {
-            const i = intentMap.get(intent);
-            if (typeof i !== "undefined") intents.add(i);
-        });
+        if (typeof options.intents !== "undefined") output.intents = options.intents;
 
         return output;
     }

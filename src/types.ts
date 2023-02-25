@@ -1,9 +1,18 @@
-import type { ClientOptions } from "discord.js";
+import type { ChatInputCommandInteraction, GatewayIntentBits } from "discord.js";
 
-export type Intents = ClientOptions["intents"];
+export type TCommandInteraction = ChatInputCommandInteraction;
 
-export type TIntent = "Moderator";
+export type TAction = (interaction: TCommandInteraction) => void;
 
 export interface IBotOptions {
-    intents?: TIntent[];
+    clientId: string;
+    token: string;
+    intents: GatewayIntentBits[];
+    testServer: string;
 }
+
+export interface ICommand {
+    name: string;
+}
+
+export interface ICommandCollectionTemplate {}
