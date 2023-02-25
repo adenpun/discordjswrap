@@ -21,6 +21,7 @@
     ],
     "scripts": {
         "build": "unbuild",
+        "dev": "unbuild --stub",
         "prepack": "pnpm run build"
     },
     "devDependencies": {

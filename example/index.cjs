@@ -17,8 +17,7 @@ bot.start().then(() => {
 bot.commands
     .add(
         CommandBuilder.New()
-            .setAliases(["test2", "test4"])
-            .setName("test")
+            .setName(["debug", "interaction", "get-interaction"])
             .setDescription("test")
             .setAction((interaction) => {
                 interaction.reply(

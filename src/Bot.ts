@@ -37,11 +37,12 @@ export default class Bot {
                     try {
                         this.commands.get(interaction.commandName)?.action(interaction);
                     } catch (err) {
-                        console.log("ERR: " + err);
-                        if (this.botOptions.replyError === true)
-                            try {
-                                interaction.reply("ERR: " + (err as object).toString());
-                            } catch {}
+                        const message = "ERR: " + err;
+                        if (this.botOptions.replyError === true) {
+                            if (!interaction.replied) interaction.reply(message);
+                            else interaction.editReply("ERR: " + (err as object).toString());
+                        }
+                        console.log(message);
                     }
                 }
             }
