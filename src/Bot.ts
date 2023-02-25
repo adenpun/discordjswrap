@@ -1,5 +1,5 @@
 import merge from "deepmerge";
-import type { ClientOptions } from "discord.js";
+import { ApplicationCommandType, ClientOptions, Events, InteractionType } from "discord.js";
 import { Client, GatewayIntentBits } from "discord.js";
 import { CommandCollection } from "./Commands";
 import type { IBotOptions } from "./types";
@@ -29,8 +29,28 @@ export default class Bot {
         return this;
     }
 
-    public start(): void {
+    public start(): Promise<void> {
         this.client.login(this.botOptions.token);
+        this.client.on(Events.InteractionCreate, (interaction) => {
+            if (interaction.type === InteractionType.ApplicationCommand) {
+                if (interaction.commandType === ApplicationCommandType.ChatInput) {
+                    try {
+                        this.commands.get(interaction.commandName)?.action(interaction);
+                    } catch (err) {
+                        console.log("ERR: " + err);
+                        if (this.botOptions.replyError === true)
+                            try {
+                                interaction.reply("ERR: " + (err as object).toString());
+                            } catch {}
+                    }
+                }
+            }
+        });
+        return new Promise<void>((resolve) => {
+            this.client.once(Events.ClientReady, () => {
+                resolve();
+            });
+        });
     }
 
     public static ProcessOptions(options: IBotOptions): ClientOptions {

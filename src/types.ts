@@ -1,6 +1,6 @@
-import type { ChatInputCommandInteraction, GatewayIntentBits } from "discord.js";
+import type { CacheType, ChatInputCommandInteraction, GatewayIntentBits } from "discord.js";
 
-export type TCommandInteraction = ChatInputCommandInteraction;
+export type TCommandInteraction = ChatInputCommandInteraction<CacheType>;
 
 export type TAction = (interaction: TCommandInteraction) => void;
 
@@ -8,7 +8,7 @@ export interface IBotOptions {
     clientId: string;
     token: string;
     intents: GatewayIntentBits[];
-    testServer: string;
+    replyError?: boolean;
 }
 
 export interface ICommand {
