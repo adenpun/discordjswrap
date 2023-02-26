@@ -1,58 +1,29 @@
-# packageName
+# discordjswrap
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![Github Actions][github-actions-src]][github-actions-href]
-[![Codecov][codecov-src]][codecov-href]
+A bad discord.js wrapper.
 
-> Package description
+# Installation
 
-## Usage
-
-Install package:
+## pnpm
 
 ```sh
-# npm
-npm install packageName
-
-# yarn
-yarn add packageName
-
-# pnpm
-pnpm install packageName
+pnpm add discordjswrap
 ```
 
-Import:
+## yarn
 
-```js
-// ESM
-import {} from "packageName";
-
-// CommonJS
-const {} = require("packageName");
+```sh
+yarn add discordjswrap
 ```
 
-## Development
+## npm
 
-- Clone this repository
-- Install latest LTS version of [Node.js](https://nodejs.org/en/)
-- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`
-- Install dependencies using `pnpm install`
-- Run interactive tests using `pnpm dev`
+```sh
+npm install discordjswrap
+```
 
-## License
+# Usage
 
-Made with 💛
+See [example]
 
-Published under [MIT License](./LICENSE).
-
-<!-- Badges -->
-
-[npm-version-src]: https://img.shields.io/npm/v/packageName?style=flat-square
-[npm-version-href]: https://npmjs.com/package/packageName
-[npm-downloads-src]: https://img.shields.io/npm/dm/packageName?style=flat-square
-[npm-downloads-href]: https://npmjs.com/package/packageName
-[github-actions-src]: https://img.shields.io/github/workflow/status/unjs/packageName/ci/main?style=flat-square
-[github-actions-href]: https://github.com/unjs/packageName/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/gh/unjs/packageName/main?style=flat-square
-[codecov-href]: https://codecov.io/gh/unjs/packageName
+[example]: ./example/

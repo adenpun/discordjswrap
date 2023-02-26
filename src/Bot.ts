@@ -29,7 +29,7 @@ export default class Bot {
         return this;
     }
 
-    public start(): Promise<void> {
+    public start(): Promise<Client<true>> {
         this.client.login(this.botOptions.token);
         this.client.on(Events.InteractionCreate, (interaction) => {
             if (interaction.type === InteractionType.ApplicationCommand) {
@@ -42,16 +42,20 @@ export default class Bot {
                             if (!interaction.replied) interaction.reply(message);
                             else interaction.editReply("ERR: " + (err as object).toString());
                         }
-                        console.log(message);
+                        console.error(message);
                     }
                 }
             }
         });
-        return new Promise<void>((resolve) => {
-            this.client.once(Events.ClientReady, () => {
-                resolve();
+        return new Promise<Client<true>>((resolve) => {
+            this.client.once(Events.ClientReady, (client) => {
+                resolve(client);
             });
         });
+    }
+
+    public destroy(): void {
+        this.client.destroy();
     }
 
     public static ProcessOptions(options: IBotOptions): ClientOptions {
