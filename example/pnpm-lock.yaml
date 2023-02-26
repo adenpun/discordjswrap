@@ -2,12 +2,12 @@ lockfileVersion: 5.4
 
 specifiers:
   discord.js: ^14.7.1
-  discordjswrap: link:..
+  discordjswrap: ^0.1.0
   dotenv: ^16.0.3
 
 dependencies:
   discord.js: 14.7.1
-  discordjswrap: link:..
+  discordjswrap: 0.1.0_discord.js@14.7.1
   dotenv: 16.0.3
 
 packages:
@@ -110,6 +110,14 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /discordjswrap/0.1.0_discord.js@14.7.1:
+    resolution: {integrity: sha512-Y0Oe1/cGamxnf6lg0tHIFZQDLolVrEFaI0qGmGPPD74/L57CtrlFwwZtoOZU3aKgaqZ5ufmwVD/XMtssAwrrjg==}
+    peerDependencies:
+      discord.js: ^14.7.1
+    dependencies:
+      discord.js: 14.7.1
     dev: false
 
   /dotenv/16.0.3:
